@@ -7,14 +7,14 @@ Persistent tracking of study sessions
 Proper backend architecture using layered design
 Maintainable and scalable code organization
 In real-world productivity platforms, the complexity lies in system architecture, secure API design, data modeling, and structured backend logic, rather than just frontend interfaces.
-## Proposed Solution
-The Study Planner System is a backend-focused study management platform designed to help users organize their study workflow in a structured and secure manner.
-Instead of treating tasks as isolated records, the system models study activity using clearly defined entities:
-Users own subjects
-Subjects contain tasks
-Tasks represent planned study goals
-Study sessions track actual study activity
-The system ensures secure access using JWT authentication and enforces proper data ownership.
+## About the Project
+The **Study Planner System** is a robust, backend-focused study management platform designed to help users organize their academic workflow in a structured and secure manner. Unlike simple task managers, this system emphasizes backend engineering principles including:
+- **Secure Authentication**: Robust user registration and login using JWT.
+- **Data Integrity**: Structured relationships between Users, Subjects, and Tasks.
+- **Activity Tracking**: Persistent logging of study sessions with automatic duration calculations.
+- **Scalable Architecture**: A clean, layered design that separates controllers, services, and repositories.
+
+The system ensures that each user has exclusive access to their own data, providing a personalized and private study management experience.
 ## Key Features
 Secure user registration and login using JWT authentication
 Subject management for organizing study areas
@@ -46,9 +46,87 @@ Mongoose ORM
 JWT Authentication
 bcrypt for password hashing
 ## Development Tools
-VS Code
-Git and GitHub
-Postman
+- **VS Code**: Primary Editor
+- **Git & GitHub**: Version Control
+- **Postman**: API Testing & Documentation
+- **MongoDB Compass**: Database Visualization
+
+## Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [MongoDB](https://www.mongodb.com/try/download/community) (Local instance or Atlas)
+
+### Installation
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Ronxak/SESD-Project-Milestone-1.git
+   cd SESD-Project-Milestone-1
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables**:
+   Create a `.env` file in the root directory and add the following:
+   ```env
+   PORT=5000
+   MONGO_URI=mongodb://localhost:27017/studyplanner
+   JWT_SECRET=your_jwt_secret_here
+   ```
+   *(Or copy from `.env.example`: `cp .env.example .env`)*
+
+4. **Run the application**:
+   ```bash
+   npm run dev
+   ```
+   The server will start at `http://localhost:5000`.
+
+## API Documentation
+
+### Authentication
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login and receive JWT token |
+
+### Subjects
+*Requires Authorization Header: `Bearer <token>`*
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/subjects` | Create a new subject |
+| GET | `/api/subjects` | Get all subjects for the user |
+| DELETE | `/api/subjects/:id` | Delete a specific subject |
+
+### Tasks
+*Requires Authorization Header: `Bearer <token>`*
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/tasks` | Create a new task |
+| GET | `/api/tasks` | Get all tasks |
+| PUT | `/api/tasks/:id` | Update task status/details |
+| DELETE | `/api/tasks/:id` | Delete a task |
+
+### Study Sessions
+*Requires Authorization Header: `Bearer <token>`*
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| POST | `/api/sessions/start` | Start a new study session |
+| GET | `/api/sessions` | View session history |
+| PUT | `/api/sessions/:id/end` | End a session (calculates duration) |
+
+## Testing
+
+1. **Authentication**: First, register a user and then login to receive a JWT token.
+2. **Setup Postman**:
+   - Set the `Authorization` header to `Bearer <YOUR_TOKEN>`.
+   - Use `Content-Type: application/json` for POST/PUT requests.
+3. **Sequential Testing**:
+   - Create a **Subject** first.
+   - Create a **Task** linked to that Subject.
+   - Start a **Session** to begin tracking time.
 ## Backend Architecture and Code Structure
 The backend is implemented using a layered architecture to ensure scalability, maintainability, and separation of concerns.
 The main layers include:
