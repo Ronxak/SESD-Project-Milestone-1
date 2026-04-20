@@ -14,12 +14,17 @@ app.use("/api/subjects", subjectRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/sessions", sessionRoutes);
 
+import mongoose from "mongoose";
+
 app.get("/", (req, res) => {
+  const dbStatus = mongoose.connection.readyState;
+  const statusMap = ["Disconnected", "Connected", "Connecting", "Disconnecting"];
+  
   res.json({ 
     message: "Welcome to Study Planner API!",
     status: "Running",
-    db_status: "Waiting for connection...",
-    docs: "/api/auth/register" // or link to README
+    db_status: statusMap[dbStatus] || "Unknown",
+    docs: "/api/auth/register"
   });
 });
 
