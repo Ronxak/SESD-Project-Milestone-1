@@ -193,6 +193,22 @@ The project follows a backend-first development approach
 Focus is on backend architecture and system design
 Frontend can be added later as a separate layer
 Designed to demonstrate real-world backend engineering practices
+## Deployment
+
+This project is configured for deployment on platforms like Render, Heroku, or Vercel.
+
+### Deployment Steps
+1. **Repository**: Ensure all changes are pushed to GitHub.
+2. **Environment Variables**: Set the following in your deployment dashboard:
+   - `NODE_ENV`: `production`
+   - `PORT`: `5000` (or as required)
+   - `MONGO_URI`: Your MongoDB Atlas connection string.
+   - `JWT_SECRET`: A strong, unique secret key.
+3. **Build Command**: `npm run build`
+4. **Start Command**: `npm start`
+
+---
+
 ## Disclaimer
 This project is designed as a backend system design and engineering learning project.
 It focuses on demonstrating clean architecture, secure authentication, and structured backend implementation rather than frontend complexity.
