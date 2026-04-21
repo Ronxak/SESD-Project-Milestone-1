@@ -207,6 +207,9 @@ This project is configured for deployment on platforms like Render, Heroku, or V
 3. **Build Command**: `npm run build`
 4. **Start Command**: `npm start`
 
+## 🌐 Live Project
+https://study-planner-m08x.onrender.com
+
 ---
 
 ## Disclaimer
