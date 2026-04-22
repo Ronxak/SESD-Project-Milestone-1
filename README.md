@@ -110,24 +110,28 @@ bcrypt for password hashing
 | DELETE | `/api/tasks/:id` | Delete a task |
 
 ### Study Sessions
-*Requires Authorization Header: `Bearer <token>`*
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | POST | `/api/sessions/start` | Start a new study session |
 | GET | `/api/sessions` | View session history |
 | PUT | `/api/sessions/:id/end` | End a session (calculates duration) |
 
+## Frontend Integration
+A beautiful, glassmorphism-styled Single Page Application (SPA) has been integrated into the project. It provides a visual dashboard to manage Subjects, Tasks, and Study Sessions natively.
+
+### Authentication Bypass
+For demonstration and testing purposes, the JWT authentication middleware has been bypassed in this version. The application automatically assigns a mock `userId` to all operations, allowing you to use the frontend immediately without needing to create an account or log in.
+
 ## Testing
 
-1. **Authentication**: First, register a user and then login to receive a JWT token.
+1. **Frontend**: Open `http://localhost:5001` in your browser. Authentication is bypassed, so you can interact with the app directly.
 2. **Setup Postman**:
-   - Set the `Authorization` header to `Bearer <YOUR_TOKEN>`.
+   - You do not need an `Authorization` header since auth is bypassed.
    - Use `Content-Type: application/json` for POST/PUT requests.
 3. **Sequential Testing**:
    - Create a **Subject** first.
    - Create a **Task** linked to that Subject.
    - Start a **Session** to begin tracking time.
-## Backend Architecture and Code Structure
 The backend is implemented using a layered architecture to ensure scalability, maintainability, and separation of concerns.
 The main layers include:
 ## Controllers
